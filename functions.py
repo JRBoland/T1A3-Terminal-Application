@@ -1,6 +1,16 @@
 #make sure you use pep8 styling!
+fed_dog_count_main = 0
+total_dogs_count_main = 0
+dogs = {}
+
+def fed_dog_count_tally():
+    print("\n\n_______________________________________")
+    print("Number of dogs that have been fed today: " + str(fed_dog_count_main) + "/" + str(total_dogs_count_main) + ".\n")
+#\nXX total meals to be prepared.\nx meals to contain special dietary requirements.\n_______________________________________\n")
+    print("_______________________________________\n\n")
+
 def main_menu():
-    print("\n\n_______________________________________\nxx/XX dogs have been fed today.\nXX total meals to be prepared.\nx meals to contain special dietary requirements.\n_______________________________________\n")
+    fed_dog_count_tally()
     print("1. View dogs in shelter")
     print("2. Add dog information")
     print("3. Edit dog information")
@@ -40,12 +50,17 @@ def main_menu():
 
 def view_dogs():
     print("*** View Dogs ***")
-    filler_pass = input("Enter anything to return to main menu: ")
+    for dog_id, dog_info in dogs.items():
+        print("\nDog", dog_id + 1,":\n_______________________________________")
+        for key in dog_info:
+            print(key + ":\n", dog_info[key],)
+            print("_______________________________________")
+    filler_pass = input("\n\nPress any key & hit enter to return to main menu: ")
     main_menu()
 
 
 def add_new_dog():
-    dogs = {}
+    
     fed_dog_count = 0
     print("\n*** Add dog information ***")
     while True:
@@ -54,6 +69,7 @@ def add_new_dog():
         breed = input("Breed: ")
         medical_requirements = input("Any medical or dietary requirements? Y/N: ")
         #print(yes_or_no(medical_requirements))
+        
         if medical_requirements.lower().startswith("y") and len(medical_requirements) < 5:
             medical_requirements = "Yes"
         elif medical_requirements.lower().startswith("n") and len(medical_requirements) < 5:
@@ -85,9 +101,12 @@ def add_new_dog():
         new_dog["Details of medical/dietary requirement"] = requirement_info
         new_dog["Has " + name + " been fed today?"] = has_been_fed
    
-        new_dog_count = len(dogs) + 1
+        new_dog_count = len(dogs)
         dogs[new_dog_count] = new_dog
-
+        
+        global fed_dog_count_main, total_dogs_count_main
+        fed_dog_count_main += fed_dog_count
+        total_dogs_count_main += new_dog_count
         #for been_fed_prompt in dogs:
         #    been_fed_prompt = Has_been_fed
         #    if been_fed_prompt == "Yes":
@@ -95,25 +114,61 @@ def add_new_dog():
 
         #menu_options()
         #break
-        new_dog_menu_option = input("\n\n_______________________________________\nNew dog #" + str(new_dog_count) + " entered: " + name + "\n_______________________________________\n\nPlease select next action. \n\n1. Add another dog.\n2. View list of newly added dogs.\n3. View total list of dogs\n4. Exit to main menu.\n\nChoose your answer by typing the appropriate number and hitting enter:  ")
-        if new_dog_menu_option.startswith("1") and len(new_dog_menu_option) < 3:
-            pass
-        elif new_dog_menu_option.startswith("2") and len(new_dog_menu_option) < 3:
-            for dog_id, dog_info in dogs.items():
-                print("\nDog", dog_id,":\n_______________________________________")
-                for key in dog_info:
-                    print(key + ":\n", dog_info[key], "\n_______________________________________")
-                print("\n\n *        *        *        *        *")
-                
-        elif new_dog_menu_option == "3":
-            print("option 3 not implemented yet")
-            pass
-        elif new_dog_menu_option == "4":
-            print("you have chosen option 4")
-            break
-        else:
-            print("exiting to main menu")
-            break
+        
+        def new_dog_menu():
+            print("\n***********************************")
+            print("1. Add a dog to database")
+            print("2. View list of recently added dogs")
+            print("3. View total list of dogs")
+            print("4. Exit to main menu")
+            print("***********************************\n")
+
+            new_dog_menu_selection = int(input("Please enter your selection: "))
+            try:
+                if new_dog_menu_selection == 1:
+                    add_new_dog()
+                elif new_dog_menu_selection == 2:
+                    for dog_id, dog_info in dogs.items():
+                        print("\nDog", dog_id + 1,":\n_______________________________________")
+                        for key in dog_info:
+                            print(key + ":\n", dog_info[key], "\n_______________________________________")
+                        print("\n\n *        *        *        *        *")
+                    #print("\n\nNew count of dogs is: ", add_new_dog().new_dog_count)
+                    new_dog_menu()
+                elif new_dog_menu_selection == 3:
+                    print("View total list of dogs")
+                    new_dog_menu()
+                elif new_dog_menu_selection == 4:
+                    print("Exiting to main menu...")
+                    main_menu()
+                else:
+                    print("Invalid choice. Enter 1-4")
+                    new_dog_menu()
+            except ValueError:
+                print("Invalid choice. Enter 1-4")
+        new_dog_menu()
+        #______________________
+        #new_dog_menu_option = input("\n\n_______________________________________\nNew dog #" + str(new_dog_count) + " entered: " + name + "\n_______________________________________\n\nPlease select next action. \n\n1. Add another dog.\n2. View list of newly added dogs.\n3. View total list of dogs\n4. Exit to main menu.\n\nChoose your answer by typing the appropriate number and hitting enter:  ")
+        #if new_dog_menu_option.startswith("1") and len(new_dog_menu_option) < 3:
+        #    pass
+        #elif new_dog_menu_option.startswith("2") and len(new_dog_menu_option) < 3:
+        #    for dog_id, dog_info in dogs.items():
+        #        print("\nDog", dog_id,":\n_______________________________________")
+        #        for key in dog_info:
+        #            print(key + ":\n", dog_info[key], "\n_______________________________________")
+        #        print("\n\n *        *        *        *        *")
+        #        
+        #elif new_dog_menu_option == "3":
+        #    print("option 3 not implemented yet")
+        #    pass
+        #elif new_dog_menu_option == "4":
+        #    print("Exiting to main menu...")
+        #    main_menu()
+        #    break
+        #else:
+        #    print("exiting to main menu")
+        #    break
+        #_____________________
         
         #add_another_dog = input("\nWould you like to add another dog? Y/N: ")
         #if not add_another_dog.lower().startswith("y") and len(add_another_dog) < 5:

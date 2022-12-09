@@ -13,23 +13,30 @@ def main_menu():
             selection = int(input("\n\nEnter menu choice: "))
             if selection == 1:
                 view_dogs()
+                break
             elif selection == 2:
                 add_new_dog()
+                break
             elif selection == 3:
                 edit_dog_info()
+                break
             elif selection == 4:
                 mark_dog_as_fed()
+                break
             elif selection == 5:
                 dogs_to_be_fed()
+                break
             elif selection == 6:
                 remove_dog()
+                break
             elif selection == 7:
-                exit()
+                break
             else:
                 print("\n*** INVALID CHOICE ***\n*** Enter 1-7 ***")
                 main_menu()
         except ValueError:
             print("Invalid choice. Please enter 1-7.")
+    exit()
 
 def view_dogs():
     print("*** View Dogs ***")

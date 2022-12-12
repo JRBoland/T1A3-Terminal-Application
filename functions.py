@@ -9,8 +9,13 @@ linebreak_graphic = "_________________________________________________"
 starbreak_graphic = "************************************************"
 #from pytz import timezone
 #from tzlocal import get_localzone
-
+import os
 from tinydb import TinyDB, Query
+
+def clear():
+    os.system('cls' if os.name=='nt' else 'clear')
+
+clear()
 db = TinyDB('dogsdb.json')
 
 User = Query()
@@ -33,6 +38,7 @@ def update_to_no():
 
 if (now.hour == 0 and now.minute == 0 and now.second == 0): 
     update_to_no()
+
 
 
 total_dogs_count_main = len(db)
@@ -62,20 +68,29 @@ def fed_dog_counter():
     db_fed_dog_tally = len(results)
     global fed_dog_count_main
     fed_dog_count_main = db_fed_dog_tally
-fed_dog_counter()
+#fed_dog_counter()
 
 def fed_dog_count_tally():
     total_dogs_count_main = len(db)
     fed_dog_counter()
     print("Number of dogs that have been fed today: " + str(fed_dog_count_main) + "/" + str(total_dogs_count_main) + ".")
 #\nXX total meals to be prepared.\nx meals to contain special dietary requirements.\n_______________________________________\n")
-    
 
-def main_menu():
+def fed_dog_count_hero_banner():
+    clear()
     print("\n\n" + linebreak_graphic)
     print(now.strftime(tz_fmt) + "\n")
     fed_dog_count_tally()
     print(linebreak_graphic + "\n\n")
+
+
+def main_menu():
+    clear()
+    #print("\n\n" + linebreak_graphic)
+    #print(now.strftime(tz_fmt) + "\n")
+    #fed_dog_count_tally()
+    #print(linebreak_graphic + "\n\n")
+    fed_dog_count_hero_banner()
     print("1. View dogs in shelter")
     print("2. Add dog information")
     print("3. Edit dog information")
@@ -114,6 +129,8 @@ def main_menu():
     exit()
 
 def view_dogs():
+    clear()
+    fed_dog_count_hero_banner()
     global dogs
     dogs = db.all()
     try:
@@ -142,6 +159,7 @@ def view_dogs():
     
 
 def new_dog_menu():
+    clear()
     print("\n" + starbreak_graphic)
     print("[1] Add a dog to database")
     #print("[2] View list of recently added dogs")
@@ -149,6 +167,7 @@ def new_dog_menu():
     print("[2] Exit to main menu")
     print(starbreak_graphic + "\n")
     def add_new_dog():
+        clear()
         print("\n" + starbreak_graphic)
         print("\nAdd dog information")
         print("To return to main menu at any time type 'exit'\n")
@@ -159,11 +178,13 @@ def new_dog_menu():
             dog_id = len(db) + 1
             name = input("\nWhat is the dogs name?: \n")
             if name.lower() == 'exit':
+                clear()
                 main_menu()
             else:
                 name = name
             breed = input("Breed: \n")
             if breed.lower() == 'exit':
+                clear()
                 main_menu()
             else:
                 breed = breed
@@ -307,6 +328,7 @@ def new_dog_menu():
 
 
 def edit_dog_info():
+    clear()
     global dogs
     #print("Dogs on file: "+ str(dogs))
     view_dogs()
@@ -337,6 +359,8 @@ def edit_dog_info():
             pass
 
     def edit_dog_info_menu():
+        clear()
+        view_dogs()
         print("\n")
         print("[1] Name")
         print("[2] Breed")

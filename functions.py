@@ -1,20 +1,47 @@
 #make sure you use pep8 styling
 import json
+import time
+import datetime
+from datetime import datetime
+import tabulate
+#from prettytable import PrettyTable
+
+#from pytz import timezone
+#from tzlocal import get_localzone
+
 from tinydb import TinyDB, Query
 db = TinyDB('dogsdb.json')
 
 User = Query()
 
+#local_tz = tzlocal
+#tz = local_tz
+#now = datetime.now(tz)
+#now = datetime.datetime(2022, 12, 12, 0, 0, 0, 500)
+now = datetime.now()
+tz_fmt = '%a %b %d %Y \n%H:%M:%S'
+
+#print(now())
+
+def update_to_no():
+    #results = db.search(User.Fed == 'Yes')
+    #for res in results: 
+    #    res['Fed'] = 'No'
+    db.update({'Fed': 'No'}, Query().Fed.exists())
+#    db.update(results)
+
+if (now.hour == 0 and now.minute == 0 and now.second == 0): 
+    update_to_no()
+
+
 total_dogs_count_main = len(db)
-
-
 
 dogs = {}
 dogs = db.all()
-#print(dogs)
-
+print(dogs)
 
 fed_dog_count_main = 0
+print(now.strftime(tz_fmt))
 
 def fed_dog_counter():
     results = db.search(User.Fed == 'Yes')
@@ -22,9 +49,6 @@ def fed_dog_counter():
     global fed_dog_count_main
     fed_dog_count_main = db_fed_dog_tally
 fed_dog_counter()
-
-
-
 
 def fed_dog_count_tally():
     print("\n\n_______________________________________")
@@ -73,18 +97,26 @@ def main_menu():
 
 def view_dogs():
     print("*** View Dogs ***")
-    for dog_id, dog_info in dogs.items():
-        print("\nDog", dog_id + 1,":\n_______________________________________")
-        for key in dog_info:
-            print(key + ":\n", dog_info[key],)
-            print("_______________________________________")
+    global dogs
+    header = dogs[0].keys()
+    rows = [x.values() for x in dogs]
+    print(tabulate.tabulate(rows,header, tablefmt='grid'))
+    #for index in range(len(dogs)):
+    #    print("\nDog", key +1, ":\n")
+    #    for key,value in dogs[index]:
+    #        print(dogs[index][key][value])
+    #for dog_id, dog_info in dogs.items():
+    #    print("\nDog", dog_id + 1,":\n_______________________________________")
+    #    for key in dog_info:
+    #        print(key + ":\n", dog_info[key],)
+    #        print("_______________________________________")
     filler_pass = input("\n\nPress any key & hit enter to return to main menu: ")
     main_menu()
 
 
 def add_new_dog():
-    
-    fed_dog_count = 0
+    global fed_dog_count_main
+    fed_dog_count = fed_dog_count_main
     print("\n*** Add dog information ***")
     while True:
         
@@ -121,8 +153,8 @@ def add_new_dog():
         
         new_dog["Name"] = name
         new_dog["Breed"] = breed
-        new_dog["Medical/dietary requirements"] = medical_requirements
-        new_dog["Details of medical/dietary requirement"] = requirement_info
+        new_dog["Medical/Dietary Requirements?"] = medical_requirements
+        new_dog["Details of M/D Requirement"] = requirement_info
         new_dog["Fed"] = has_been_fed
         
         
@@ -144,7 +176,7 @@ def add_new_dog():
         
         db.insert(new_dog)
         
-        global fed_dog_count_main#, has_been_fed_main
+        #, has_been_fed_main
         fed_dog_count_main += fed_dog_count
         #has_been_fed_main += has_been_fed
         #for been_fed_prompt in dogs:
@@ -228,11 +260,22 @@ def add_new_dog():
 
 def edit_dog_info():
     print("*** Edit Dog info ***")
+    for d_id, d_info in dogs.items():
+        print("\nDog ID:", d_id)
+        if key == 'Name' in d_info:
+            print(key + ':', d_info[key])
+
+    for i in dogs:
+        print(dogs[i].values())
+    print("Select which dog you'd like to edit: ") 
     filler_pass = input("Enter anything to return to main menu: ")
     main_menu()
 
 def mark_dog_as_fed():
     print("*** Mark Dog as fed ***")
+
+
+
     filler_pass = input("Enter anything to return to main menu: ")
     main_menu()
 

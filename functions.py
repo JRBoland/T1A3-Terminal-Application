@@ -1,7 +1,30 @@
-#make sure you use pep8 styling!
-fed_dog_count_main = 0
-total_dogs_count_main = 0
+#make sure you use pep8 styling
+import json
+from tinydb import TinyDB, Query
+db = TinyDB('dogsdb.json')
+
+User = Query()
+
+total_dogs_count_main = len(db)
+
+
+
 dogs = {}
+dogs = db.all()
+#print(dogs)
+
+
+fed_dog_count_main = 0
+
+def fed_dog_counter():
+    results = db.search(User.Fed == 'Yes')
+    db_fed_dog_tally = len(results)
+    global fed_dog_count_main
+    fed_dog_count_main = db_fed_dog_tally
+fed_dog_counter()
+
+
+
 
 def fed_dog_count_tally():
     print("\n\n_______________________________________")
@@ -64,6 +87,7 @@ def add_new_dog():
     fed_dog_count = 0
     print("\n*** Add dog information ***")
     while True:
+        
         new_dog = {}
         name = input("\nWhat is the dogs name?: ")
         breed = input("Breed: ")
@@ -99,28 +123,45 @@ def add_new_dog():
         new_dog["Breed"] = breed
         new_dog["Medical/dietary requirements"] = medical_requirements
         new_dog["Details of medical/dietary requirement"] = requirement_info
-        new_dog["Has " + name + " been fed today?"] = has_been_fed
-   
-        new_dog_count = len(dogs)
-        dogs[new_dog_count] = new_dog
+        new_dog["Fed"] = has_been_fed
         
-        global fed_dog_count_main, total_dogs_count_main
+        
+        #file.write("Name: ")
+        #file.write(name + ", ")
+        #file.write("Breed: ")
+        #file.write(breed +", ")
+        #file.write("Medical/dietary requirements :")
+        #file.write(medical_requirements + ", ")
+        #file.write("Details of medical/dietary requirement :")
+        #file.write(requirement_info + ", ")
+        #file.write("Has " + name + " been fed today? :")
+        #file.write(has_been_fed + ".\n")
+        
+
+        new_dog_count = len(new_dog)
+        dogs[new_dog_count] = new_dog
+        #dogs.update(new_dog)
+        
+        db.insert(new_dog)
+        
+        global fed_dog_count_main#, has_been_fed_main
         fed_dog_count_main += fed_dog_count
-        total_dogs_count_main += new_dog_count
+        #has_been_fed_main += has_been_fed
         #for been_fed_prompt in dogs:
         #    been_fed_prompt = Has_been_fed
         #    if been_fed_prompt == "Yes":
         #        fed_dog_count += 1
-
+        
+        
         #menu_options()
         #break
         
         def new_dog_menu():
             print("\n***********************************")
-            print("1. Add a dog to database")
-            print("2. View list of recently added dogs")
-            print("3. View total list of dogs")
-            print("4. Exit to main menu")
+            print("[1] Add a dog to database")
+            print("[2] View list of recently added dogs")
+            print("[3] View total list of dogs")
+            print("[4] Exit to main menu")
             print("***********************************\n")
 
             new_dog_menu_selection = int(input("Please enter your selection: "))

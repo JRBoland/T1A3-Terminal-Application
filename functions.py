@@ -4,6 +4,7 @@ import time
 import datetime
 from datetime import datetime
 import tabulate
+import pyfiglet
 import schedule
 #from prettytable import PrettyTable
 linebreak_graphic = "_________________________________________________"
@@ -41,13 +42,15 @@ time_of_open = datetime.now()
 
 def check_if_new_day():
     if time_file != now.strftime(tz_fmt_for_check):
-        update_to_no() == True
+        update_to_no()
         if update_to_no() is True:
             get_ok = input("Fed count tally has been reset as it is a new day.")
+    else: 
+        pass
 
 with open('date.txt', mode='r+') as time_file:
     check_if_new_day()
-    time_file.write(now.strftime(tz_fmt_for_check) + "\n")
+    time_file.write(now.strftime(tz_fmt_for_check))
     time_file.close()
 
 
@@ -118,11 +121,12 @@ def fed_dog_counter():
 def fed_dog_count_tally():
     total_dogs_count_main = len(db)
     fed_dog_counter()
-    print("Number of dogs that have been fed today: " + str(fed_dog_count_main) + "/" + str(total_dogs_count_main) + ".")
+    print("Number of dogs that have been fed today: \n\n" + (pyfiglet.figlet_format(str(fed_dog_count_main) + " / " + str(total_dogs_count_main),font="alphabet")))
 #\nXX total meals to be prepared.\nx meals to contain special dietary requirements.\n_______________________________________\n")
 
 def fed_dog_count_hero_banner():
-    clear()
+    clear() 
+    #print(pyfiglet.figlet_format("D S F H",font='basic'))#,justify="right",width=110))
     print("\n\n" + linebreak_graphic)
     print(now.strftime(tz_fmt) + "\n")
     fed_dog_count_tally()
@@ -165,6 +169,7 @@ def main_menu():
                 remove_dog()
                 break
             elif selection == 7:
+                exit()
                 break
             else:
                 main_menu()

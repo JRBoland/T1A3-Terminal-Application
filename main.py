@@ -4,7 +4,7 @@ functions.clear()
 input("Hello!")
 functions.clear()
 functions.fed_dog_count_hero_banner()
-input("username: ")
+input("Hit enter to begin: ")
 functions.clear()
 
 functions.main_menu()

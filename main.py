@@ -1,12 +1,18 @@
 import functions
 import os
+
+def begin():
+    while True: 
+        functions.clear()
+        functions.fed_dog_count_hero_banner()
+        start = input("Hit enter to begin: \n")
+        if start == "":
+            return False
+
 functions.clear()
 input("Hello!")
+begin()
 functions.clear()
-functions.fed_dog_count_hero_banner()
-input("Hit enter to begin: ")
-functions.clear()
-
 functions.main_menu()
 functions.clear()
 

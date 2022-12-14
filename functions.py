@@ -8,7 +8,7 @@ import pyfiglet
 import schedule
 #from prettytable import PrettyTable
 linebreak_graphic = "_________________________________________________"
-starbreak_graphic = "************************************************"
+starbreak_graphic = "*************************************************"
 #from pytz import timezone
 #from tzlocal import get_localzone
 import os
@@ -42,7 +42,7 @@ time_of_open = datetime.now()
 
 def check_if_new_day():
     if (''.join(open('date.txt').read().split('\n'))) == (now.strftime(tz_fmt_for_check)):    
-        check_today = input("The fed tally has been recovered from last session as it is still the same day as when the dogs were fed. ")  
+        check_today = input("The fed tally has been recovered from last session as it is still the same day as when the dogs were fed.\n\nPress 'enter' to continue.  ")  
         
     else: 
         
@@ -51,13 +51,16 @@ def check_if_new_day():
         #print(now.strftime(tz_fmt_for_check))
         #print(''.join(open('date.txt').read().split('\n')))
         #chek = input("Not executed")
-        if update_to_no() is True:
-            get_ok = input("Fed count tally has been reset as it is a new day.")
+        #if update_to_no() is True:
+        get_ok = input("Fed count tally has been reset as it is a new day.\n\nPress 'enter' to continue. ")
 
 with open('date.txt', mode='r+') as time_file:
     check_if_new_day()
-    time_file.write(''.join(open('date.txt').read().split('\n')))
-    time_file.close()
+    with open('date.txt',mode='w') as time_file:
+        
+    #time_file.write(''.join(open('date.txt').read().split('\n')))
+        time_file.write(now.strftime(tz_fmt_for_check))
+        time_file.close()
 
 
 print(time_file)
@@ -97,24 +100,21 @@ fed_dog_count_main = 0
 
 
 def linebreak():
-    print("\n\n")
+    print("\n")
     print(linebreak_graphic)
 
+def starbreak():
+    print("\n")
+    print(starbreak_graphic)
+
 def return_to_main():
-    filler_pass = int(input("\n\n[0] - Return to main menu:  \n"))
+    print(starbreak_graphic)
+    filler_pass = (input("\nHit 'enter' to Return to main menu:  \n"))
     try:
-        if filler_pass == 0:
+        if filler_pass == "":
             main_menu()
     except:
         print("Invalid input")
-
-def return_to_main_option():
-    while True:
-        filler_pass = input("\n\nHit 'enter' to return to main menu or type 'cont' to continue. \n")
-        if filler_pass == 'cont':
-            break
-        else:
-            main_menu()
 
 
 def fed_dog_counter():
@@ -140,21 +140,23 @@ def fed_dog_count_hero_banner():
 
 
 def main_menu():
-    clear()
-    #print("\n\n" + linebreak_graphic)
-    #print(now.strftime(tz_fmt) + "\n")
-    #fed_dog_count_tally()
-    #print(linebreak_graphic + "\n\n")
-    fed_dog_count_hero_banner()
-    print("1. View dogs in shelter")
-    print("2. Add dog information")
-    print("3. Edit dog information")
-    print("4. Mark a dog as fed")
-    print("5. View dogs still to be fed")
-    print("6. Delete dog from database")
-    print("7. Exit")
+    
     while True:
         try:
+            clear()
+            #print("\n\n" + linebreak_graphic)
+            #print(now.strftime(tz_fmt) + "\n")
+            #fed_dog_count_tally()
+            #print(linebreak_graphic + "\n\n")
+            fed_dog_count_hero_banner()
+    
+            print("1. View dogs in shelter")
+            print("2. Add dog information")
+            print("3. Edit dog information")
+            print("4. Update fed status")
+            print("5. View dogs still to be fed")
+            print("6. Delete dog from database")
+            print("7. Exit")
             selection = int(input("\n\nEnter menu choice: \n"))
             if selection == 1:
                 view_dogs()
@@ -167,21 +169,25 @@ def main_menu():
                 break
             elif selection == 4:
                 mark_dog_as_fed()
-                break
+                return_to_main()
             elif selection == 5:
                 dogs_to_be_fed()
-                break
+                return_to_main()
             elif selection == 6:
                 remove_dog()
-                break
+                #return_to_main()
             elif selection == 7:
                 exit()
                 break
             else:
+                main_menu_invalid_input = input("Invalid input. Hit 'enter' to return to main menu.")
                 main_menu()
-        except ValueError:
-            filler_continue = input("Invalid choice. Please enter a valid numerical option.")
+        except ValueError as ve:
+            print(starbreak_graphic)
+            print("Invalid input error 'ValueError'. Hit 'enter' to return to menu.")
+            filler_input = input(" \n")
             main_menu()
+            print(starbreak_graphic)
     exit()
 
 def view_dogs():
@@ -369,10 +375,12 @@ def new_dog_menu():
             print("Exiting to main menu...")
             main_menu()
         else:
-            print("Invalid choice. Enter 1-2")
+            print("Invalid choice. Enter 0 - 1")
             new_dog_menu()
     except ValueError:
-        again =input("Invalid choice. Enter 1-2")
+        print(starbreak_graphic)
+        again = input("Invalid choice. Hit 'enter' to return to menu.\n")
+        print(starbreak_graphic)
         new_dog_menu()
 
 
@@ -381,48 +389,9 @@ def edit_dog_info():
     global dogs
     #print("Dogs on file: "+ str(dogs))
     view_dogs()
-    
-    #print("\nDogs on file: \n")
-    #names = [sub['Name'] for sub in dogs]
-    #dog_id = [sub['EntryID'] for sub in dogs]
-##  
-    #for dog_id, name in enumerate(names, start=1):
-    #   print("ID: ",dog_id," - ",(name))
-        #name += 1
-    #print("\n\n")
-    #print("[0]  -  Return to main menu")
-
-    #dog_to_dlt = int(input("\nEnter the EntryID of the dog to be removed from database: \n"))
-    #dog_rec_to_dlt = db.get(User.EntryID == int(dog_to_dlt))
-    #if dog_to_dlt in db.get(User.EntryID == str(dog_to_dlt)):
-        #print(db.get(User.EntryID == str(dog_to_dlt)))
-    #print("\nYou have chosen ID: " + str(dog_to_dlt) + " - " + (dog_rec_to_dlt['Name']) + ".\n\n")
-    #dog_to_dlt = int(input("\nEnter the EntryID of the dog to be removed from database: \n"))
-    #dog_rec_to_dlt = db.get(User.EntryID == int(dog_to_dlt))
-    #if dog_to_dlt in db.get(User.EntryID == str(dog_to_dlt)):
-        #print(db.get(User.EntryID == str(dog_to_dlt)))
-    #print("\nYou have chosen ID: " + str(dog_to_dlt) + " - " + (dog_rec_to_dlt['Name']) + ".\n\n")
-    #print("\nYou have chosen ID: " + str(dog_to_dlt) + " - " + (dogs[dog_to_dlt - 1]['Name']) + ".\n\n")
-    #continue_pass = input("Hit 'enter' if correct. Type 'back' to return to choose a different dog or 'exit' to return to the main menu. \n")
-
-
-
-    dog_to_edit = int(input("\nType the ID of dog to edit: \n"))
-    dog_rec_to_edit = db.get(User.EntryID == int(dog_to_edit))
-    if dog_to_edit == 0:
-        main_menu()
-    else:
-        print(starbreak_graphic)
-        print("\nYou have chosen ID: " + str(dog_to_edit) + " - " + (dog_rec_to_edit['Name']) + ".")
-        continue_pass = input("Hit 'enter' if correct. Type 'back' to return to choose a different dog or 'exit' to return to the main menu. \n")
-        print(starbreak_graphic)
-        if continue_pass.lower() == 'back':
-            edit_dog_info()
-        elif continue_pass.lower() == 'exit':
-            main_menu()
-        else: 
-            pass
-
+    print(starbreak_graphic)
+    print("Edit Dog information.")
+    print(linebreak_graphic)
     def edit_dog_info_menu():
         clear()
         view_dogs()
@@ -481,8 +450,60 @@ def edit_dog_info():
         ##pull list of dog names and enumerate
         elif selection == 0:
             main_menu()
-    edit_dog_info_menu()
+        else:
+            
+            edit_dog_info_menu()
 
+    #print("\nDogs on file: \n")
+    #names = [sub['Name'] for sub in dogs]
+    #dog_id = [sub['EntryID'] for sub in dogs]
+##  
+    #for dog_id, name in enumerate(names, start=1):
+    #   print("ID: ",dog_id," - ",(name))
+        #name += 1
+    #print("\n\n")
+    #print("[0]  -  Return to main menu")
+
+    #dog_to_dlt = int(input("\nEnter the EntryID of the dog to be removed from database: \n"))
+    #dog_rec_to_dlt = db.get(User.EntryID == int(dog_to_dlt))
+    #if dog_to_dlt in db.get(User.EntryID == str(dog_to_dlt)):
+        #print(db.get(User.EntryID == str(dog_to_dlt)))
+    #print("\nYou have chosen ID: " + str(dog_to_dlt) + " - " + (dog_rec_to_dlt['Name']) + ".\n\n")
+    #dog_to_dlt = int(input("\nEnter the EntryID of the dog to be removed from database: \n"))
+    #dog_rec_to_dlt = db.get(User.EntryID == int(dog_to_dlt))
+    #if dog_to_dlt in db.get(User.EntryID == str(dog_to_dlt)):
+        #print(db.get(User.EntryID == str(dog_to_dlt)))
+    #print("\nYou have chosen ID: " + str(dog_to_dlt) + " - " + (dog_rec_to_dlt['Name']) + ".\n\n")
+    #print("\nYou have chosen ID: " + str(dog_to_dlt) + " - " + (dogs[dog_to_dlt - 1]['Name']) + ".\n\n")
+    #continue_pass = input("Hit 'enter' if correct. Type 'back' to return to choose a different dog or 'exit' to return to the main menu. \n")
+
+
+
+    dog_to_edit = int(input("Type [0] to return to main menu.\n\nEnter the EntryID of dog to edit: \n"))
+    dog_rec_to_edit = db.get(User.EntryID == int(dog_to_edit))
+    if dog_to_edit == 0:
+        main_menu()
+    if dog_rec_to_edit in db:
+        try:
+            print(starbreak_graphic)
+            print("\nYou have chosen ID: " + str(dog_to_edit) + " - " + (dog_rec_to_edit['Name']) + ".")
+            continue_pass = input("Hit 'enter' if correct. Type 'back' to return to choose a different dog or 'exit' to return to the main menu. \n")
+            print(starbreak_graphic)
+            if continue_pass == "":
+                edit_dog_info_menu()
+            
+            elif continue_pass.lower() == 'back':
+                edit_dog_info()
+            elif continue_pass.lower() == 'exit':
+                main_menu()
+            else: 
+                edit_dog_info()
+        except:
+            edit_dog_info()
+    else: 
+        edit_dog_info()
+
+    
 def mark_dog_as_fed():
     
     clear()
@@ -490,7 +511,8 @@ def mark_dog_as_fed():
     #print("Dogs on file: "+ str(dogs))
     view_dogs()
     print(starbreak_graphic)
-    print("Mark Dog as fed")
+    print("Update fed status")
+    print(linebreak_graphic)
     #print("\nDogs on file: \n")
     #names = [sub['Name'] for sub in dogs]
     #dog_id = [sub['EntryID'] for sub in dogs]
@@ -500,53 +522,69 @@ def mark_dog_as_fed():
     #    #name += 1
 #
     #print("\n\nID:  0  -  Return to main menu")
+    #    dog_rec_to_edit = db.get(User.EntryID == int(dog_to_edit))
+    ##if dog_to_edit == 0:
+    #    main_menu()
+    #if dog_rec_to_edit == True:
     
     
-    
-    dog_to_edit = int(input("\nType the ID of dog to mark as fed: \n"))
+    dog_to_edit = int(input("Enter [0] to return to main menu.\n\nEnter the EntryID of dog to update fed status: \n"))
     dog_rec_to_edit = db.get(User.EntryID == int(dog_to_edit))
-    
     if dog_to_edit == 0:
         main_menu()
-    elif dog_to_edit == int(dog_id):
-        clear()
-        print(starbreak_graphic)
-        print("\nYou have chosen ID: " + str(dog_to_edit) + " - " + (dog_rec_to_edit['Name']) + ".")
-        print(starbreak_graphic)
-    is_fed = input("\nType Y/Yes if " + (dog_rec_to_edit['Name']) + " has been fed today.\nType N/No if " + (dog_rec_to_edit['Name']) + " has not been fed today: \n")
-    if is_fed.lower().startswith("y") and len(is_fed) < 5:
-        is_fed = "Yes"
-    elif is_fed.lower().startswith("n") and len(is_fed) < 5:
-        is_fed = "No"
-    else: 
-        print("Please try again ")
-        return_to_main()
-    #is_fed = input("\nHas dog been fed today?: \n")
-    ##if is_fed.lower().startswith("y") and len(is_fed) < 5:
-    #    is_fed = "Yes"
-    #elif is_fed.lower().startswith("n") and len(is_fed) < 5:
-    #    is_fed = "No"
-    #else:
-    #    is_fed = is_fed
-    clear()
-    db.update({'Fed': is_fed}, User.EntryID == int(dog_to_edit))
-    print("\nUpdated Dog " + str(dog_to_edit) + " fed status to: \n" + is_fed + "\n")  
-    print("\n" + starbreak_graphic)
-    print("[1] Mark another dog as fed")
-    #print("[2] View list of recently added dogs")
-    #print("[3] View total list of dogs")
-    print("[2] Exit to main menu")
-    print(starbreak_graphic + "\n")                               
-    next_is_fed = int(input("Choose next action: "))
-    if next_is_fed == 1:
-        mark_dog_as_fed()
-    elif next_is_fed == 2:
-        main_menu()
-    else:
-        print("Please try again")
+    if dog_rec_to_edit in db:
+        try:
+            #dog_rec_to_edit = db.get(User.EntryID == int(dog_to_edit))
+            print(starbreak_graphic)
+            #if dog_to_edit == 0:
+            #    main_menu()
+            #elif dog_to_edit == int(dog_id):
+            #    clear()
+            #    print(starbreak_graphic)
+            #    
+            #    print(starbreak_graphic)
+            print("\nYou have chosen ID: " + str(dog_to_edit) + " - " + (dog_rec_to_edit['Name']) + ".")
+            print(linebreak_graphic)
+            is_fed = input("\nType (not case sensitive):\nY/Yes if Yes or N/No if No\n\nHas " + (dog_rec_to_edit['Name']) + " been fed today?: \n")
+            if is_fed.lower().startswith("y") and len(is_fed) < 5:
+                is_fed = "Yes"
+            elif is_fed.lower().startswith("n") and len(is_fed) < 5:
+                is_fed = "No"
+            else: 
+                print("Please try again ")
+                return_to_main()
+            #is_fed = input("\nHas dog been fed today?: \n")
+            ##if is_fed.lower().startswith("y") and len(is_fed) < 5:
+            #    is_fed = "Yes"
+            #elif is_fed.lower().startswith("n") and len(is_fed) < 5:
+            #    is_fed = "No"
+            #else:
+            #    is_fed = is_fed
+            clear()
+            db.update({'Fed': is_fed}, User.EntryID == int(dog_to_edit))
+            print("\nUpdated Dog " + str(dog_to_edit) + " fed status to: \n" + is_fed + "\n")  
+            print("\n" + starbreak_graphic)
+            print("[1] Mark another dog as fed")
+            #print("[2] View list of recently added dogs")
+            #print("[3] View total list of dogs")
+            print("[2] Exit to main menu")
+            print(starbreak_graphic + "\n")                               
+            next_is_fed = int(input("Choose next action: "))
+            if next_is_fed == 1:
+                mark_dog_as_fed()
+            elif next_is_fed == 2:
+                main_menu()
+            else:
+                print("Please try again")
 
-    
-    return_to_main()
+        except TypeError as type_error_return_to_main:
+            print("\n" + starbreak_graphic)
+            print("Invalid input error 'TypeError'. Hit 'Enter' to return to main menu.")
+            #type_error_return_to_main = input("\n")
+            print("\n" + starbreak_graphic)
+            return_to_main()
+    else:
+        mark_dog_as_fed()
 
 def dogs_to_be_fed():
     clear()
@@ -564,6 +602,7 @@ def dogs_to_be_fed():
             to_be_fed_output = {}
             to_be_fed_output = db.search(User.Fed == 'No')
             print(tabulate.tabulate(to_be_fed_output,headers="keys", tablefmt='grid', maxcolwidths=[None,None])) #maxcolwidths=[None, None]))
+            
             #header = dogs[0].keys()
             #rows = [x.values() for x in dogs]#change
             #print(to_be_fed_output)
@@ -580,13 +619,27 @@ def dogs_to_be_fed():
         #        print(key + ":\n", dog_info[key],)
         #        print("_______________________________________")
         except IndexError:
-            print(linebreak_graphic)
+            print("\n" + linebreak_graphic)
             print("\nNo dogs currently in shelter")
             print(linebreak_graphic)
             return_to_main()
-    print(starbreak_graphic)
+    
     dogs_to_be_fed_view()
-    return_to_main()
+    def next_action_update_fed():
+        user_to_edit = input("\nEnter your next action: \n")
+        if user_to_edit == "1":
+            mark_dog_as_fed()
+        elif user_to_edit == "0":
+            main_menu()
+        else: 
+            dogs_to_be_fed()
+    print(starbreak_graphic)
+    print("[1] Update fed status of dogs")
+    print("[0] Return to main menu")
+    print(linebreak_graphic)
+    next_action_update_fed()
+
+    
 
 def remove_dog():
     clear()
@@ -594,32 +647,46 @@ def remove_dog():
     view_dogs()
     #names = [sub['Name'] for sub in dogs]
     #dog_id = [sub['EntryID'] for sub in dogs]
-    
-    dog_to_dlt = int(input("\nEnter the EntryID of the dog to be removed from database: \n"))
+    dog_to_dlt = int(input("Type [0] to return to main menu.\n\nEnter the EntryID of the dog to be removed from database: \n"))
     dog_rec_to_dlt = db.get(User.EntryID == int(dog_to_dlt))
+    if dog_to_dlt == 0:
+        return_to_main()
+    
+    #dog_to_edit = int(input("\nType the ID of dog to update fed status: \n"))
+    #dog_rec_to_edit = db.get(User.EntryID == int(dog_to_edit))
+    #if dog_to_edit == 0:
+    #    main_menu()
+    #if dog_rec_to_edit == True:
+    #    try:
+    if dog_rec_to_dlt in db:
+        try:
     #if dog_to_dlt in db.get(User.EntryID == str(dog_to_dlt)):
         #print(db.get(User.EntryID == str(dog_to_dlt)))
-    print("\nYou have chosen ID: " + str(dog_to_dlt) + " - " + (dog_rec_to_dlt['Name']) + ".\n\n")
-    #print("\nYou have chosen ID: " + str(dog_to_dlt) + " - " + (dogs[dog_to_dlt - 1]['Name']) + ".\n\n")
-    continue_pass = input("Hit 'enter' if correct. Type 'back' to return to choose a different dog or 'exit' to return to the main menu. \n")
-    if continue_pass == "":
-        continue_pass_confirm = input("Continuing with this action will permanently delete " + (dog_rec_to_dlt['Name'] + ". Do you wish to continue? \nY/N: "))
-        if continue_pass_confirm.lower().startswith("y") and len(continue_pass_confirm) < 5:
-            print(starbreak_graphic)
-        #dog_to_dlt = input("\nEnter the EntryID of the dog to be removed from database: \n")
-            db.remove(User.EntryID == int(dog_to_dlt))
-            print("Dog removed: " + str(dog_to_dlt) + " - " + (dog_rec_to_dlt['Name']) + ".")  
-            print("Goodbye " + (dog_rec_to_dlt['Name']) + "!!!")  
-            print(starbreak_graphic)
-        elif continue_pass_confirm.lower().startswith("n") and len(continue_pass_confirm) < 5:
-            remove_dog()
-        else: 
-            remove_dog()             
-    elif continue_pass == "back":
-        remove_dog()
-    elif continue_pass == "exit":
-        main_menu()
+            print("\nYou have chosen ID: " + str(dog_to_dlt) + " - " + (dog_rec_to_dlt['Name']) + ".\n\n")
+            #print("\nYou have chosen ID: " + str(dog_to_dlt) + " - " + (dogs[dog_to_dlt - 1]['Name']) + ".\n\n")
+            continue_pass = input("Hit 'enter' if correct. Type 'back' to return to choose a different dog or 'exit' to return to the main menu. \n")
+            if continue_pass == "":
+                continue_pass_confirm = input("Continuing with this action will permanently delete " + (dog_rec_to_dlt['Name'] + ". Do you wish to continue? \nY/N: "))
+                if continue_pass_confirm.lower().startswith("y") and len(continue_pass_confirm) < 5:
+                    print(starbreak_graphic)
+                #dog_to_dlt = input("\nEnter the EntryID of the dog to be removed from database: \n")
+                    db.remove(User.EntryID == int(dog_to_dlt))
+                    print("Dog removed: " + str(dog_to_dlt) + " - " + (dog_rec_to_dlt['Name']) + ".")  
+                    print("Goodbye " + (dog_rec_to_dlt['Name']) + "!!!")  
+                    return_to_main()
+                elif continue_pass_confirm.lower().startswith("n") and len(continue_pass_confirm) < 5:
+                    remove_dog()
+                else: 
+                    remove_dog()             
+            elif continue_pass == "back":
+                remove_dog()
+            elif continue_pass == "exit":
+                main_menu()
+            else:
+                dummy = input("Invalid option, press enter to continue: ")
+                remove_dog()
+        except:
+            get = input("Something happened")
     else:
-        dummy = input("Invalid option, press enter to continue: ")
-        remove_dog()
-    return_to_main()
+        indaput = input("Something went wrong")
+    #    remove_dog()

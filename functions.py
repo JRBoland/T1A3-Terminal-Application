@@ -41,16 +41,22 @@ def update_to_no():
 time_of_open = datetime.now()
 
 def check_if_new_day():
-    if time_file != now.strftime(tz_fmt_for_check):
+    if (''.join(open('date.txt').read().split('\n'))) == (now.strftime(tz_fmt_for_check)):    
+        check_today = input("The fed tally has been recovered from last session as it is still the same day as when the dogs were fed. ")  
+        
+    else: 
+        
         update_to_no()
+        
+        #print(now.strftime(tz_fmt_for_check))
+        #print(''.join(open('date.txt').read().split('\n')))
+        #chek = input("Not executed")
         if update_to_no() is True:
             get_ok = input("Fed count tally has been reset as it is a new day.")
-    else: 
-        pass
 
 with open('date.txt', mode='r+') as time_file:
     check_if_new_day()
-    time_file.write(now.strftime(tz_fmt_for_check))
+    time_file.write(''.join(open('date.txt').read().split('\n')))
     time_file.close()
 
 
@@ -494,20 +500,20 @@ def mark_dog_as_fed():
     #    #name += 1
 #
     #print("\n\nID:  0  -  Return to main menu")
-    print(starbreak_graphic)
-
+    
     
     
     dog_to_edit = int(input("\nType the ID of dog to mark as fed: \n"))
+    dog_rec_to_edit = db.get(User.EntryID == int(dog_to_edit))
     
     if dog_to_edit == 0:
         main_menu()
-    if dog_to_edit <= int(dog_id):
+    elif dog_to_edit == int(dog_id):
         clear()
         print(starbreak_graphic)
-        print("\nYou have chosen ID: " + str(dog_to_edit) + " - " + (dogs[dog_to_edit - 1]['Name']) + ".")
+        print("\nYou have chosen ID: " + str(dog_to_edit) + " - " + (dog_rec_to_edit['Name']) + ".")
         print(starbreak_graphic)
-    is_fed = input("\nType Y/Yes if " + (dogs[dog_to_edit - 1]['Name']) + " has been fed today.\nType N/No if " + (dogs[dog_to_edit - 1]['Name']) + " has not been fed today: \n")
+    is_fed = input("\nType Y/Yes if " + (dog_rec_to_edit['Name']) + " has been fed today.\nType N/No if " + (dog_rec_to_edit['Name']) + " has not been fed today: \n")
     if is_fed.lower().startswith("y") and len(is_fed) < 5:
         is_fed = "Yes"
     elif is_fed.lower().startswith("n") and len(is_fed) < 5:

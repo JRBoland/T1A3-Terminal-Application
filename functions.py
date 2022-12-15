@@ -321,7 +321,7 @@ def new_dog_menu():
                 
 
             
-            new_dog["DoggyID"] = dog_id
+            new_dog["EntryID"] = dog_id
             new_dog["Name"] = name
             new_dog["Breed"] = breed
             new_dog["Medical/Dietary Requirements?"] = medical_requirements
@@ -411,13 +411,13 @@ def edit_dog_info():
         if selection == "1":
             linebreak()
             edit_name = input("\nWhat would you like to update the dogs name to?: \n")
-            db.update({'Name': edit_name}, User.DoggyID == int(dog_to_edit))
+            db.update({'Name': edit_name}, User.EntryID == int(dog_to_edit))
             print("\nUpdated Dog " + str(dog_to_edit) + " name to: \n" + edit_name + "\n")
             edit_dog_info_menu()
         elif selection == "2":
             linebreak()
             edit_breed = input("\nWhat would you like to update the dogs breed to?: \n")
-            db.update({'Breed': edit_breed}, User.DoggyID == int(dog_to_edit))
+            db.update({'Breed': edit_breed}, User.EntryID == int(dog_to_edit))
             print("\nUpdated Dog " + str(dog_to_edit) + " breed to: \n" + edit_breed + "\n")           
             edit_dog_info_menu()
         elif selection == "3":
@@ -429,13 +429,13 @@ def edit_dog_info():
                 edit_mdr = "No"
             else:
                 edit_mdr = edit_mdr
-            db.update({'Medical/Dietary Requirements?': edit_mdr}, User.DoggyID == int(dog_to_edit))
+            db.update({'Medical/Dietary Requirements?': edit_mdr}, User.EntryID == int(dog_to_edit))
             print("\nUpdated Dog " + str(dog_to_edit) + " has medical/dietary requirements to: \n" + edit_mdr + "\n")           
             edit_dog_info_menu()
         elif selection == "4":
             linebreak()
             edit_dmdr = input("\nUpdate details of medical/dietary requirement: \n")
-            db.update({'Details of M/D Requirement': edit_dmdr}, User.DoggyID == int(dog_to_edit))
+            db.update({'Details of M/D Requirement': edit_dmdr}, User.EntryID == int(dog_to_edit))
             print("\nUpdated Dog " + str(dog_to_edit) + " medical/dietary requirement details to: \n" + edit_dmdr + "\n")                      
             edit_dog_info_menu()
         elif selection == "5":
@@ -447,7 +447,7 @@ def edit_dog_info():
                 edit_fed = "No"
             else:
                 edit_fed = edit_fed
-            db.update({'Fed': edit_fed}, User.DoggyID == int(dog_to_edit))
+            db.update({'Fed': edit_fed}, User.EntryID == int(dog_to_edit))
             print("\n\nUpdated Dog " + str(dog_to_edit) + " fed status to: \n" + edit_fed + "\n")                                 
             edit_dog_info_menu()
 
@@ -461,7 +461,7 @@ def edit_dog_info():
 
     #print("\nDogs on file: \n")
     #names = [sub['Name'] for sub in dogs]
-    #dog_id = [sub['DoggyID'] for sub in dogs]
+    #dog_id = [sub['EntryID'] for sub in dogs]
 ##  
     #for dog_id, name in enumerate(names, start=1):
     #   print("ID: ",dog_id," - ",(name))
@@ -469,23 +469,23 @@ def edit_dog_info():
     #print("\n\n")
     #print("[0]  -  Return to main menu")
 
-    #dog_to_dlt = int(input("\nEnter the DoggyID of the dog to be removed from database: \n"))
-    #dog_rec_to_dlt = db.get(User.DoggyID == int(dog_to_dlt))
-    #if dog_to_dlt in db.get(User.DoggyID == str(dog_to_dlt)):
-        #print(db.get(User.DoggyID == str(dog_to_dlt)))
+    #dog_to_dlt = int(input("\nEnter the EntryID of the dog to be removed from database: \n"))
+    #dog_rec_to_dlt = db.get(User.EntryID == int(dog_to_dlt))
+    #if dog_to_dlt in db.get(User.EntryID == str(dog_to_dlt)):
+        #print(db.get(User.EntryID == str(dog_to_dlt)))
     #print("\nYou have chosen ID: " + str(dog_to_dlt) + " - " + (dog_rec_to_dlt['Name']) + ".\n\n")
-    #dog_to_dlt = int(input("\nEnter the DoggyID of the dog to be removed from database: \n"))
-    #dog_rec_to_dlt = db.get(User.DoggyID == int(dog_to_dlt))
-    #if dog_to_dlt in db.get(User.DoggyID == str(dog_to_dlt)):
-        #print(db.get(User.DoggyID == str(dog_to_dlt)))
+    #dog_to_dlt = int(input("\nEnter the EntryID of the dog to be removed from database: \n"))
+    #dog_rec_to_dlt = db.get(User.EntryID == int(dog_to_dlt))
+    #if dog_to_dlt in db.get(User.EntryID == str(dog_to_dlt)):
+        #print(db.get(User.EntryID == str(dog_to_dlt)))
     #print("\nYou have chosen ID: " + str(dog_to_dlt) + " - " + (dog_rec_to_dlt['Name']) + ".\n\n")
     #print("\nYou have chosen ID: " + str(dog_to_dlt) + " - " + (dogs[dog_to_dlt - 1]['Name']) + ".\n\n")
     #continue_pass = input("Hit 'enter' if correct. Type 'back' to return to choose a different dog or 'exit' to return to the main menu. \n")
 
 
 
-    dog_to_edit = int(input("Type [0] to return to main menu.\n\nEnter the DoggyID of dog to edit: \n"))
-    dog_rec_to_edit = db.get(User.DoggyID == int(dog_to_edit))
+    dog_to_edit = int(input("Type [0] to return to main menu.\n\nEnter the EntryID of dog to edit: \n"))
+    dog_rec_to_edit = db.get(User.EntryID == int(dog_to_edit))
     if dog_to_edit == 0:
         main_menu()
     if dog_rec_to_edit in db:
@@ -520,26 +520,26 @@ def mark_dog_as_fed():
     print(linebreak_graphic + "\n\n")
     #print("\nDogs on file: \n")
     #names = [sub['Name'] for sub in dogs]
-    #dog_id = [sub['DoggyID'] for sub in dogs]
+    #dog_id = [sub['EntryID'] for sub in dogs]
 ##  #
     #for dog_id, name in enumerate(names, start=1):
     #   print("ID: ",dog_id," - ",(name))
     #    #name += 1
 #
     #print("\n\nID:  0  -  Return to main menu")
-    #    dog_rec_to_edit = db.get(User.DoggyID == int(dog_to_edit))
+    #    dog_rec_to_edit = db.get(User.EntryID == int(dog_to_edit))
     ##if dog_to_edit == 0:
     #    main_menu()
     #if dog_rec_to_edit == True:
     
     
-    dog_to_edit = int(input("Enter [0] to return to main menu.\n\nEnter the DoggyID of dog to update fed status: \n"))
-    dog_rec_to_edit = db.get(User.DoggyID == int(dog_to_edit))
+    dog_to_edit = int(input("Enter [0] to return to main menu.\n\nEnter the EntryID of dog to update fed status: \n"))
+    dog_rec_to_edit = db.get(User.EntryID == int(dog_to_edit))
     if dog_to_edit == 0:
         main_menu()
     if dog_rec_to_edit in db:
         try:
-            #dog_rec_to_edit = db.get(User.DoggyID == int(dog_to_edit))
+            #dog_rec_to_edit = db.get(User.EntryID == int(dog_to_edit))
             print("\n\n" + starbreak_graphic)
             #if dog_to_edit == 0:
             #    main_menu()
@@ -566,7 +566,7 @@ def mark_dog_as_fed():
             #else:
             #    is_fed = is_fed
             clear()
-            db.update({'Fed': is_fed}, User.DoggyID == int(dog_to_edit))
+            db.update({'Fed': is_fed}, User.EntryID == int(dog_to_edit))
             print("\nUpdated Dog " + str(dog_to_edit) + " fed status to: \n" + is_fed + "\n")  
             print("\n" + starbreak_graphic)
             print("[1] Mark another dog as fed")
@@ -653,22 +653,22 @@ def remove_dog():
     print("\nRemove dog from database")
     print(linebreak_graphic)
     #names = [sub['Name'] for sub in dogs]
-    #dog_id = [sub['DoggyID'] for sub in dogs]
-    dog_to_dlt = int(input("\n\nType [0] to return to main menu.\n\nEnter the DoggyID of the dog to be removed from database: \n"))
-    dog_rec_to_dlt = db.get(User.DoggyID == int(dog_to_dlt))
+    #dog_id = [sub['EntryID'] for sub in dogs]
+    dog_to_dlt = int(input("\n\nType [0] to return to main menu.\n\nEnter the EntryID of the dog to be removed from database: \n"))
+    dog_rec_to_dlt = db.get(User.EntryID == int(dog_to_dlt))
     if dog_to_dlt == 0:
         main_menu()
     
     #dog_to_edit = int(input("\nType the ID of dog to update fed status: \n"))
-    #dog_rec_to_edit = db.get(User.DoggyID == int(dog_to_edit))
+    #dog_rec_to_edit = db.get(User.EntryID == int(dog_to_edit))
     #if dog_to_edit == 0:
     #    main_menu()
     #if dog_rec_to_edit == True:
     #    try:
     if dog_rec_to_dlt in db:
         try:
-    #if dog_to_dlt in db.get(User.DoggyID == str(dog_to_dlt)):
-        #print(db.get(User.DoggyID == str(dog_to_dlt)))
+    #if dog_to_dlt in db.get(User.EntryID == str(dog_to_dlt)):
+        #print(db.get(User.EntryID == str(dog_to_dlt)))
             print("\nYou have chosen ID: " + str(dog_to_dlt) + " - " + (dog_rec_to_dlt['Name']) + ".\n\n")
             #print("\nYou have chosen ID: " + str(dog_to_dlt) + " - " + (dogs[dog_to_dlt - 1]['Name']) + ".\n\n")
             continue_pass = input("Hit 'enter' if correct. Type 'back' to return to choose a different dog or 'exit' to return to the main menu. \n")
@@ -676,8 +676,8 @@ def remove_dog():
                 continue_pass_confirm = input("Continuing with this action will permanently delete " + (dog_rec_to_dlt['Name'] + ". Do you wish to continue? \nY/N: "))
                 if continue_pass_confirm.lower().startswith("y") and len(continue_pass_confirm) < 5:
                     print(starbreak_graphic)
-                #dog_to_dlt = input("\nEnter the DoggyID of the dog to be removed from database: \n")
-                    db.remove(User.DoggyID == int(dog_to_dlt))
+                #dog_to_dlt = input("\nEnter the EntryID of the dog to be removed from database: \n")
+                    db.remove(User.EntryID == int(dog_to_dlt))
                     print("Dog removed: " + str(dog_to_dlt) + " - " + (dog_rec_to_dlt['Name']) + ".")  
                     print("Goodbye " + (dog_rec_to_dlt['Name']) + "!!!")  
                     return_to_main()

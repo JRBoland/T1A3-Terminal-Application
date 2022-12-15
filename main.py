@@ -11,7 +11,7 @@ import pyfiglet
  #           return False
 
 functions.clear()
-print(pyfiglet.figlet_format("Dog Shelter \n     Feeding Helper"))
+print(pyfiglet.figlet_format("Dog Shelter \n     Feeding Helper."))
 #input(pyfiglet.figlet_format("Press\nenter:",font="smkeyboard"))
 input("\n\nHit 'enter' to begin.\n")
 #begin()

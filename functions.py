@@ -27,14 +27,10 @@ tz_fmt_for_check = "%a %b %d"
 time_of_open = datetime.now()
 
 #Function to update all 'fed' results in database to no. To be called if check if new day defaults to else statement
-#For styling, all db (database) updates have a line above and below to separate them them.
 def update_to_no():
-
     results = db.search(User.Fed == "Yes")
-
     for res in results:
         res["Fed"] = "No"
-    
     db.update({"Fed": "No"}, Query().Fed.exists())
 
 #If statement to check if date stored in date.txt matches time pulled from datetime module (format inclusive). 
@@ -130,7 +126,6 @@ def main_menu():
             print(LINEBREAK_GRAPHIC)
 
             selection = input("\n\nEnter menu choice: \n")
-
             if selection == "1":
                 view_dogs()
                 print("\nDogs in shelter\n")
@@ -177,7 +172,6 @@ def view_dogs():
     try:
         header = dogs[0].keys()
         rows = [x.values() for x in dogs]
-
         print("")
         print(tabulate.tabulate(rows, header, tablefmt="grid", maxcolwidths=[None, None]))
 
@@ -212,7 +206,6 @@ def new_dog_menu():
             linebreak()
 
             name = input("\nWhat is the dogs name?: \n")
-
             if name.lower() == "exit":
                 clear()
                 main_menu()
@@ -221,7 +214,6 @@ def new_dog_menu():
             linebreak()
 
             breed = input("Breed: \n")
-
             if breed.lower() == "exit":
                 clear()
                 main_menu()
@@ -230,7 +222,6 @@ def new_dog_menu():
             linebreak()
 
             medical_requirements = input("Any medical or dietary requirements? Yes/No: \n")
-
             if (medical_requirements.lower().startswith("y") and len(medical_requirements) < 5):
                 medical_requirements = "Yes"
             elif (medical_requirements.lower().startswith("n") and len(medical_requirements) < 5):
@@ -252,7 +243,6 @@ def new_dog_menu():
                 requirement_info = "N/A"
 
             has_been_fed = input("Has " + name + " been fed today?: \n")
-
             if has_been_fed.lower().startswith("y") and len(has_been_fed) < 5:
                 has_been_fed = "Yes"
             elif has_been_fed.lower().startswith("n") and len(has_been_fed) < 5:
@@ -274,7 +264,6 @@ def new_dog_menu():
 
             db.insert(new_dog)
             new_dog_count = len(new_dog)
-
             get_input = input("\nDog added to database: " + name + ".\n\nHit 'enter' to continue.")
             new_dog_menu()
 
@@ -284,7 +273,6 @@ def new_dog_menu():
 def edit_dog_info():
     clear()
     global dogs
-
     view_dogs()
     print("\n\nEdit Dog information.")
     print(LINEBREAK_GRAPHIC + "\n\n")
@@ -302,63 +290,50 @@ def edit_dog_info():
         print("\n[0] Return to main menu")
 
         selection = input("\nPlease choose from above what you would like to edit: \n")
-
         if selection == "1":
             linebreak()
             edit_name = input("\nWhat would you like to update the dogs name to?: \n")
-
             db.update({"Name": edit_name}, User.DoggyID == int(dog_to_edit))
-
             print("\nUpdated Dog " + str(dog_to_edit) + " name to: \n" + edit_name + "\n")
             edit_dog_info_menu()
 
         elif selection == "2":
             linebreak()
             edit_breed = input( "\nWhat would you like to update the dogs breed to?: \n")
-
             db.update({"Breed": edit_breed}, User.DoggyID == int(dog_to_edit))
-
             print("\nUpdated Dog " + str(dog_to_edit) + " breed to: \n" + edit_breed + "\n")
             edit_dog_info_menu()
 
         elif selection == "3":
             linebreak()
             edit_mdr = input("\nDoes this dog still have any medical requirements?: \n")
-
             if edit_mdr.lower().startswith("y") and len(edit_mdr) < 5:
                 edit_mdr = "Yes"
             elif edit_mdr.lower().startswith("n") and len(edit_mdr) < 5:
                 edit_mdr = "No"
             else:
                 edit_mdr = edit_mdr
-
             db.update({"Medical/Dietary Requirements?": edit_mdr}, User.DoggyID == int(dog_to_edit))
-
             print("\nUpdated Dog " + str(dog_to_edit) + " has medical/dietary requirements to: \n" + edit_mdr + "\n")
             edit_dog_info_menu()
 
         elif selection == "4":
             linebreak()
             edit_dmdr = input("\nUpdate details of medical/dietary requirement: \n")
-
             db.update({"Details of M/D Requirement": edit_dmdr}, User.DoggyID == int(dog_to_edit))
-
             print("\nUpdated Dog " + str(dog_to_edit) + " medical/dietary requirement details to: \n" + edit_dmdr + "\n")
             edit_dog_info_menu()
 
         elif selection == "5":
             linebreak()
             edit_fed = input("\nHas dog been fed today?: \n")
-
             if edit_fed.lower().startswith("y") and len(edit_fed) < 5:
                 edit_fed = "Yes"
             elif edit_fed.lower().startswith("n") and len(edit_fed) < 5:
                 edit_fed = "No"
             else:
                 edit_fed = edit_fed
-
             db.update({"Fed": edit_fed}, User.DoggyID == int(dog_to_edit))
-
             print("\n\nUpdated Dog " + str(dog_to_edit) + " fed status to: \n" + edit_fed + "\n")
             edit_dog_info_menu()
 
@@ -407,7 +382,6 @@ def mark_dog_as_fed():
 
     dog_to_edit = int(input("Enter [0] to return to main menu.\n\nEnter the DoggyID of dog to update fed status: \n"))
     dog_rec_to_edit = db.get(User.DoggyID == int(dog_to_edit))
-    
     if dog_to_edit == 0:
         main_menu()
     if dog_rec_to_edit in db:
@@ -418,7 +392,6 @@ def mark_dog_as_fed():
             print(LINEBREAK_GRAPHIC + "\n\n")
 
             is_fed = input("\nType (not case sensitive):\nY/Yes if Yes or N/No if No\n\nHas " + (dog_rec_to_edit["Name"]) + " been fed today?: \n")
-
             if is_fed.lower().startswith("y") and len(is_fed) < 5:
                 is_fed = "Yes"
             elif is_fed.lower().startswith("n") and len(is_fed) < 5:
@@ -437,7 +410,6 @@ def mark_dog_as_fed():
             print(STARBREAK_GRAPHIC + "\n")
 
             next_is_fed = int(input("Choose next action: "))
-
             if next_is_fed == 1:
                 mark_dog_as_fed()
             elif next_is_fed == 2:
@@ -480,7 +452,6 @@ def dogs_to_be_fed():
 
     def next_action_update_fed():
         user_to_edit = input("\nEnter your next action: \n")
-
         if user_to_edit == "1":
             mark_dog_as_fed()
         elif user_to_edit == "0":

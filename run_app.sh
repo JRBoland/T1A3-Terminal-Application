@@ -14,4 +14,4 @@ echo "Installing requirements.txt"
 pip install -r requirements.txt
 
 echo "Running Dog Shelter Feeding Helper..."
-python main.py
+python3 main.py

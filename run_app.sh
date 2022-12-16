@@ -1,7 +1,5 @@
 #!/bin/bash
-
-
-if ! [[ -x "$(command -v python)" ]]
+if ! [[ -x "$(command -v python3)" ]]
 then
   echo 'Error: 
     This program runs on Python, but it looks like Python is not installed.

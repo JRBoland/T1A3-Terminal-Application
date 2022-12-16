@@ -1,4 +1,7 @@
-import datetime, tabulate, pyfiglet, os
+import datetime
+import tabulate
+import pyfiglet
+import os
 from datetime import datetime
 from tinydb import TinyDB, Query
 
@@ -95,7 +98,7 @@ def fed_dog_count_tally():
     total_dogs_count_main = len(db)
     fed_dog_counter()
     #pyfiglet used to make counter stand out
-    print("Number of dogs that have been fed today: \n\n" + (pyfiglet.figlet_format(str(fed_dog_count_main) + "  /  " + str(total_dogs_count_main),font="basic",)))
+    print("\nNumber of dogs that have been fed today: \n\n" + (pyfiglet.figlet_format(str(fed_dog_count_main) + "  /  " + str(total_dogs_count_main),font="basic",)))
     
     if str(fed_dog_count_main) == str(total_dogs_count_main):
         print(LINEBREAK_GRAPHIC)
@@ -153,12 +156,13 @@ def main_menu():
                 exit_input = input(pyfiglet.figlet_format(    "Until\n         Next\n                 Time..."))
                 exit()
             else:
-                invalid_input_rtm = input("Invalid input. Hit 'enter' to return to main menu.")
+                invalid_input_rtm = input("Invalid input. Please answer with 1-7. \nHit 'enter' to return to main menu.")
                 main_menu()
 
-        except ValueError:
+        except (ValueError, IndexError, KeyError) as the_error:
             print(STARBREAK_GRAPHIC)
-            value_error_input_rtm = input("Invalid input error 'ValueError'. Hit 'enter' to return to menu.\n")
+            value_error_input_rtm = input(f"Invalid error {the_error}. Hit 'enter' to return to menu.\n")
+            print(STARBREAK_GRAPHIC)
             main_menu()
 
     exit()
@@ -441,9 +445,9 @@ def mark_dog_as_fed():
             else:
                 print("Please try again")
 
-        except TypeError as type_error_return_to_main:
+        except (TypeError, ValueError, KeyError) as error_return_to_main:
             print("\n" + STARBREAK_GRAPHIC)
-            print("Invalid input error 'TypeError'. Hit 'Enter' to return to main menu.")
+            print(f"Invalid input error '{error_return_to_main}'. Hit 'Enter' to return to main menu.")
             print("\n" + STARBREAK_GRAPHIC)
             return_to_main()
 
@@ -532,7 +536,10 @@ def remove_dog():
                 dummy = input("Invalid option, press enter to continue: ")
                 remove_dog()
 
-        except:
-            get = input("Something happened")
+        except (ValueError, KeyError, NameError, TypeError, IndexError) as type_of_error:
+            print(STARBREAK_GRAPHIC)
+            value_error_input_rtm = input(f"Invalid error {type_of_error}. Hit 'enter' to return to menu.\n")
+            print(STARBREAK_GRAPHIC)
+            main_menu()
     else:
-        indaput = input("Something went wrong")
+        inc_input = input("Something went wrong")

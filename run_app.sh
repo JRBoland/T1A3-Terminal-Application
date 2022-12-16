@@ -1,6 +1,5 @@
 #!/bin/bash
-echo "Installing requirements.txt"
-pip install -r requirements.txt
+
 
 if ! [[ -x "$(command -v python)" ]]
 then
@@ -11,4 +10,8 @@ then
 else
     echo 'Python is installed on this device. Beginning Dog Shelter Feeding Helper'
 fi
+echo "Installing requirements.txt"
+pip install -r requirements.txt
+
+echo "Running Dog Shelter Feeding Helper..."
 python3 main.py

@@ -8,8 +8,9 @@ then
 else
     echo 'Python is installed on this device. Beginning Dog Shelter Feeding Helper'
 fi
-echo "Installing requirements.txt"
-pip install -r requirements.txt
-
+echo "Preparing..."
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r ./requirements.txt
 echo "Running Dog Shelter Feeding Helper..."
-python3 main.py
+python3 ./main.py

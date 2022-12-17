@@ -291,12 +291,12 @@ def new_dog_menu():
             new_dog["Details of M/D Requirement"] = requirement_info
             new_dog["Fed"] = has_been_fed
 
-            if name == True:
-                dog_id += 1
-                return dog_id
+            #if name == True:
+            #    dog_id += 1
+            #    return dog_id
 
             db.insert(new_dog)
-            new_dog_count = len(new_dog)
+            #new_dog_count = len(new_dog)
             get_input = input("\nDog added to database: " +
                               name + ".\n\nHit 'enter' to continue.")
             new_dog_menu()

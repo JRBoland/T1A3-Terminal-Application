@@ -312,11 +312,6 @@ def new_dog_menu():
             new_dog["Details of M/D Requirement"] = requirement_info
             new_dog["Fed"] = has_been_fed
 
-			#Had this but don't think its needed?
-            # if name == True:
-            #    dog_id += 1
-            #    return dog_id
-
 			#Putting new_dog{} into dogsdb.json
             db.insert(new_dog)
 
@@ -360,11 +355,11 @@ def edit_dog_info():
 			#updating the db key with its new value
             db.update({"Name": edit_name}, User.DoggyID == int(dog_to_edit))
 
-            print("\nUpdated Dog " 
+            confirm = input("\nUpdated Dog " 
 				+ str(dog_to_edit) 
-				+ " name to: \n" 
+				+ "'s name to: " 
 				+ edit_name 
-				+ "\n")
+				+ "\n\nHit 'enter' to continue.\n")
             edit_dog_info_menu()
 
         elif selection == "2":
@@ -375,11 +370,11 @@ def edit_dog_info():
 
             db.update({"Breed": edit_breed}, User.DoggyID == int(dog_to_edit))
 
-            print("\nUpdated Dog " 
+            confirm = input("\nUpdated Dog " 
 				+ str(dog_to_edit) 
-				+ " breed to: \n" 
+				+ "'s breed to: \n" 
 				+ edit_breed 
-				+ "\n")
+				+ "\n\nHit 'enter' to continue.\n")
             edit_dog_info_menu()
 
         elif selection == "3":
@@ -401,11 +396,11 @@ def edit_dog_info():
             db.update({"Medical/Dietary Requirements?": edit_mdr},
                       User.DoggyID == int(dog_to_edit))
 
-            print("\nUpdated Dog " 
+            confirm = input("\nUpdated Dog " 
 				+ str(dog_to_edit) 
 				+ " has medical/dietary requirements to: \n" 
 				+ edit_mdr 
-				+ "\n")
+				+ "\n\nHit 'enter' to continue.\n")
             edit_dog_info_menu()
 
         elif selection == "4":
@@ -416,9 +411,9 @@ def edit_dog_info():
                       User.DoggyID == int(dog_to_edit))
             print("\nUpdated Dog " 
 				+ str(dog_to_edit) 
-				+ " medical/dietary requirement details to: \n" 
+				+ "'s medical/dietary requirement details to: \n" 
 				+ edit_dmdr 
-				+ "\n")
+				+ "\n\nHit 'enter' to continue.\n")
             edit_dog_info_menu()
 
         elif selection == "5":
@@ -439,9 +434,9 @@ def edit_dog_info():
 
             print("\n\nUpdated Dog " 
 				+ str(dog_to_edit) 
-				+ " fed status to: \n" 
+				+ "'s fed status to: \n" 
 				+ edit_fed 
-				+ "\n")
+				+ "\n\nHit 'enter' to continue.\n")
             edit_dog_info_menu()
 
         elif selection == "0":

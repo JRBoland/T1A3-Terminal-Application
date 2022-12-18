@@ -15,8 +15,8 @@ else
     echo 'Preparing...'
 fi
 echo "Installing requirements..."
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 pip install -r requirements.txt
 echo "Running Dog Shelter Feeding Helper..."
 python3 main.py

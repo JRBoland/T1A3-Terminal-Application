@@ -639,9 +639,9 @@ def remove_dog():
 
             if continue_pass == "":
                 continue_pass_confirm = input(
-										"Continuing with this action will permanently delete " 
-										+ (dog_rec_to_dlt["Name"]
-										+ ". Do you wish to continue? \nY/N: "))
+					"Continuing with this action will permanently delete " 
+					+ (dog_rec_to_dlt["Name"]
+					+ ". Do you wish to continue? \nY/N: "))
 
                 if (continue_pass_confirm.lower().startswith("y") and 
 						len(continue_pass_confirm) < 5):

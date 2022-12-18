@@ -5,7 +5,7 @@ then
   pyv="$(python -V 2>&1)"
   if [[ $pyv == "Python 3"* ]]
   then
-    python main.py
+    python src/main.py
   else
     echo 'Error: 
     This program runs on Python3, but it looks like Python3 is not installed.

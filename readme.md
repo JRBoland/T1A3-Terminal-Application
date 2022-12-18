@@ -125,8 +125,6 @@
 
 10.  **Exit the application**
 
-    ![Goodbye](./T1A3-images/23-goodbye-ascii.png)
-
     - Allows the user to exit the terminal after displaying a goodbye message to the user.
     
 
@@ -140,6 +138,18 @@
         - Adding of dog weight and meal size variable
         - View *which type of dietary requirements* are required as part of the how many meals/& how many have dietary requirements menu option
         - Change to an ‘animal’ shelter, incorporating different animals (not just dogs) which can be a new variable to sort/view by. Inclusion of ‘animal type’ variable in information database.
+
+## Testing
+
+Code was tested through usage of manual testing as testing with pytest was causing issues. Pytest testing is to be implemented later to automate the testing of functions and features within the application. 
+
+The first test tests to check if the 'fed dog counter' tally display on the main menu is working as intended, and updates based on various different user actions that are intended to potentially alter the state of the variables used with the 'fed dog counter'. Additionally, the correct execution of the 'reset fed count on new day' functionality was tested in conjunction with the 'fed dog counter' tests. 
+
+![Fed counter test](./T1A3-images/test-1.png)
+
+The second test was to ensure that the most used item in the application, the main menu, operates as expected. 
+
+![MM test](./T1A3-images/test-2.png)
     
     
 ## Implementation plan

@@ -1,18 +1,5 @@
-## Link to Github Repo
-
-[View the repo on GitHub](https://github.com/JRBoland/T1A3-Terminal-Application)
-
-## Styling
-
-[PEP8](https://peps.python.org/pep-0008/) Styling was used. 
-    -- how was it used? small para
-
-### Referenced sources
-
-- Ed
-- Documentation
-- Youtube
-- Classes
+## [View the repo on GitHub](https://github.com/JRBoland/T1A3-Terminal-Application)
+## [View the presentation](https://youtube.com)
 
 
 # Dog Shelter Feeding Helper
@@ -129,9 +116,9 @@
     
 
     10.  **Exit the application**
-        
-        ![Goodbye ASCII](./T1A3-images/23-goodbye-ascii.png)
-            
+
+        ![Goodbye](./T1A3-images/23-goodbye-ascii.png)
+
         - Allows the user to exit the terminal after displaying a goodbye message to the user.
     
 
@@ -232,7 +219,7 @@
 
     **Day 5 Friday 9/12** *- jumped into build*
     
-    - Started the build after being inspired by watching [this very basic video]([https://www.youtube.com/watch?v=f3D-w6XMTN8&t=351s&ab_channel=PhilAdams](https://www.youtube.com/watch?v=f3D-w6XMTN8&t=351s&ab_channel=PhilAdams)) on how to create a menu and allow the user to input a dogs information. No database was implemented yet but I was able to create the main menu, a key feature from which all others would be accessed.
+    - Started the build after being inspired by watching [this very basic video](https://www.youtube.com/watch?v=f3D-w6XMTN8&t=351s&ab_channel=PhilAdams) on how to create a menu and allow the user to input a dogs information. No database was implemented yet but I was able to create the main menu, a key feature from which all others would be accessed.
     
     ![2 trello](./T1A3-images/43-tr-usage-2.png)
     
@@ -265,7 +252,7 @@
     
     ![6 trello](./T1A3-images/47-tr-usage-6.png)
     
-    
+
     **Day 11 Thursday 15/12 onwards**
     
     - Application was at a working and functional level. From this point onwards I made some minor changes to the code to fix some wording and display issues whilst also considering documentation for the project. Code was styled to PEP8 standards. A lot of time has been spent on trying to figure out testing with `pytest`.
@@ -290,3 +277,27 @@ Slides must include:
 
 2. An overview of code:
     - Must explain: Explanation of important parts of code, including any crucial application logic 
+
+
+### Styling
+
+[PEP8](https://peps.python.org/pep-0008/) 
+Code has been styled in accordance with Pep8 styling. 
+
+### Additional referenced sources
+
+- Python datetime (no date) Programiz. Available at: https://www.programiz.com/python-programming/datetime. 
+- Real Python (2022) Working with JSON data in python, Real Python. Real Python. Available at: https://realpython.com/python-json/. 
+- Reading and writing to text files in Python (2022) GeeksforGeeks. Available at: https://www.geeksforgeeks.org/reading-writing-text-files-python/. 
+
+- *Documentation*
+    - Python 3.11.1 documentation (no date) 3.11.1 Documentation. Available at: https://docs.python.org/3/.
+    - Tabulate (no date) PyPI. Available at: https://pypi.org/project/tabulate/.  
+    - Welcome to tinydb! (no date) Welcome to TinyDB! - TinyDB 4.7.0 documentation. Available at: https://tinydb.readthedocs.io/en/latest/. 
+    - Pyfiglet (no date) PyPI. Available at: https://pypi.org/project/pyfiglet/0.7/. 
+    - Datetime - basic date and time types (no date) Python documentation. Available at: https://docs.python.org/3/library/datetime.html. 
+    
+- *Youtube*
+    - Adams, P. (2015) 20. Creating a menu-based program using functions in Python, YouTube. YouTube. Available at: https://www.youtube.com/?v=ttps9u9kepo. 
+    - Learn Python - Full Course for Beginners tutorial (2018) YouTube. Available at: https://youtu.be/rfscVS0vtbw). 
+    - TinyDB in python - simple database for personal projects (2020) YouTube. YouTube. Available at: https://youtu.be/aP2KJoTITO0. 

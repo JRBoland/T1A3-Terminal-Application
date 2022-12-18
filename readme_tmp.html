@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>readme.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="view-the-repo-on-github"><a href="https://github.com/JRBoland/T1A3-Terminal-Application">View the repo on GitHub</a></h2>
+<h2 id="view-the-presentation"><a href="https://youtube.com">View the presentation</a></h2>
+<h3 id="help-documentation">Help documentation</h3>
+<p>This Python program uses Python 3. You can check if you have python installed by opening your systems terminal and entering the following command:
+<code>python --version</code></p>
+<p>If you do not have Python installed, you can install it <strong><a href="https://www.python.org/downloads/">here</a></strong></p>
+<h3 id="general-startup">General startup</h3>
+<ol>
+<li>Visit the <strong><a href="https://github.com/JRBoland/T1A3-Terminal-Application">projects GitHub repository</a></strong> and click the green <code>&lt; &gt; Code</code> button, and download as a ZIP file.</li>
+</ol>
+<p><img src="file:///Users/jamesboland/python_CA/docs/help-reqs-ss.png" alt="Download as Zip"></p>
+<ol start="2">
+<li>
+<p>Extract the contents of the ZIP file and move the folder to somewhere recognizable (eg. desktop). Take note of the name of the folder, it <em>should</em> be <code>T1A3-Terminal-Application-main</code>. It may not have <code>-main</code> at the end.</p>
+</li>
+<li>
+<p>In your terminal, navigate to the folder using the 'cd' command. If the folder is on your desktop, this may look like
+<code>cd desktop/t1a3-terminal-application-main</code></p>
+</li>
+<li>
+<p>Once you have navigated to the folder of the application, simply type <code>bash run_app.sh</code> and the program should install the necessary package requirements and begin.</p>
+</li>
+</ol>
+<h3 id="the-github-way">The Github way</h3>
+<ol>
+<li>Visit the <strong><a href="https://github.com/JRBoland/T1A3-Terminal-Application">projects GitHub repository</a></strong> and click the green <code>&lt; &gt; Code</code> button and copy the text provided when HTTP is selected.</li>
+</ol>
+<p><img src="file:///Users/jamesboland/python_CA/docs/help-reqs-ss-http.png" alt="Download as Zip"></p>
+<ol start="2">
+<li>Navigate to the folder you would like the file to be cloned into and clone the repository from GitHub using the text copied from above.</li>
+</ol>
+<p><code>git clone https://github.com/JRBoland/T1A3-Terminal-Application.git</code></p>
+<ol start="3">
+<li>Navigate to the folder that was cloned</li>
+</ol>
+<p><code>cd t1a3-terminal-application</code></p>
+<ol start="4">
+<li>Type <code>bash run_app.sh</code> and the program should have installed the necessary requirements and begin to run.</li>
+</ol>
+<h1 id="dog-shelter-feeding-helper">Dog Shelter Feeding Helper</h1>
+<ul>
+<li>Application to manage a dog shelter’s daily feeding schedule - keeping track of the feeding &amp; the dietary information of dogs that come in.</li>
+<li><em>The ‘fed’ status of the dog will reset each day</em>. The dogs name &amp; information will be assigned a ‘DoggyID’ and remain in the database until it has been deleted (adopted).</li>
+</ul>
+<h2 id="list-of-features">List of features</h2>
+<ol>
+<li>
+<p><strong>Continuity message to indicate to user if fed count has been reset.</strong></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/1-fed-recovered.png" alt="Fed status recovered"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/2-fed-reset.png" alt="Fed status reset"></p>
+<ul>
+<li>On opening the application, a message will indicate if the fed count has been reset (new day) or carried on from last session (same day)</li>
+<li>Using a separate file <code>date.txt</code>, a date in <code>%a %b %d</code> format (eg. Sat Dec 17) will be checked and compared with the systems date in the same format.</li>
+</ul>
+<p><img src="file:///Users/jamesboland/python_CA/docs/3-date-txt.png" alt="date.txt"></p>
+<ul>
+<li>Using <code>if</code> statements, the fed counter remains the same from the last session if the dates match, aka it is the same day. The fed counter variable will reset to 0 if it recognises that it is a new day, done by changing all of the ‘Fed’ key values from ‘Yes’ to ‘No’ in the json file <code>dogsdb.json</code> on recognition of it being a different date. In both situations regardless, <code>date.txt</code> is written over and replaced with the current date at time of use.</li>
+</ul>
+<p><img src="file:///Users/jamesboland/python_CA/docs/4-code-date-check.png" alt="Date checker (code)"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/5-code-update-to-no.png" alt="Update to no (code)"></p>
+</li>
+<li>
+<p><strong>Display of count of dogs in shelter, count of dogs that have been fed</strong> (eg. 15/20 dogs have been fed today). <em>Count of dogs that have been fed will reset on a new day.</em></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/6-fed-count.png" alt="Fed count"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/7-code-fed-counter.png" alt="Fed counter (code)"></p>
+<ul>
+<li>Shows current date and time using <code>datetime</code> from the in built python module.</li>
+<li>If all dogs are fed, the user gets a message on the display indicating that all dogs have been fed today.</li>
+<li>Uses pyfiglet to create a more ‘eye catching’ counter for the user.</li>
+</ul>
+<p><img src="file:///Users/jamesboland/python_CA/docs/8-code-fed-count-tally.png" alt="Fed count tally (code)"></p>
+</li>
+<li>
+<p><strong>Menu to view which actions the user wishes to take. Entering an input takes the user to that menu option.</strong></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/9-main-menu.png" alt="Main menu"></p>
+<ul>
+<li>Includes some error handling to catch index or value errors, accounting for the user inputting an invalid option.</li>
+</ul>
+<p><img src="file:///Users/jamesboland/python_CA/docs/10-code-mm-handling.png" alt="MM handling (code)"></p>
+</li>
+</ol>
+<p><strong>Menu options include:</strong></p>
+<ol start="4">
+<li>
+<p><strong>View dogs &amp; information (including dietary requirements/ in readable format)</strong></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/11-view-dogs.png" alt="View dogs"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/12-code-vd-tabulate.png" alt="View dogs (tabulate)(code)"></p>
+<ul>
+<li>Uses <code>tabulate</code> to show the dogs in an easily viewable format, looping through and pulling the key value pairs stored in the <code>dogsdb.json</code> file.</li>
+</ul>
+</li>
+<li>
+<p><strong>Add a dog &amp; its information to the database</strong></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/13-add-dog.png" alt="Add dog"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/14-code-collect-info.png" alt="Collect info (code)"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/15-assign-variables.png" alt="Assign variables (code)"></p>
+<ul>
+<li>User can add a new dog to the shelter, entering its ‘name’, ‘breed’, ‘medical and dietary requirements’ (yes/no), ‘details of medical &amp; dietary requirement’ and whether or not the dog has been ‘fed’. This information is stored in the dictionary format (in the case of the add dog menu; ‘prompt’: ‘answer’) and is stored in a separate json file <code>dogsdb.json</code> and used in conjunction with the python package <code>tinydb</code>.</li>
+<li>User can exit back to main menu at any time by typing exit.</li>
+<li><em>Nice to have</em> next addition would be to have empty answers return “N/A” or something to that effect. User should also be able to exit using “0” with future updates to functionality. Additionally, a user can currently input a new record which is all empty. This issue needs to be fixed.</li>
+</ul>
+</li>
+<li>
+<p><strong>Edit dog information in database</strong></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/16-edit-dog-menu.png" alt="Edit dog menu"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/17-code-update-db.png" alt="Update database (code)"></p>
+<ul>
+<li>Using view dogs from above, the user can enter in an identifier ‘DoggyID’ to select a dog from the database and change their information.</li>
+<li>Using tinydb, a record is matched.</li>
+<li>User then gets a secondary menu with prompts of which key value they would like to change. Users new response overrides previous value for the selected key (menu option), which is then updated in the database.</li>
+<li>User receives confirmation of update.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update the fed status of a dog</strong></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/18-update-fed.png" alt="Update fed"></p>
+<ul>
+<li>Very similar process to menu option 3, however streamlined to update fed status. As with all other ways to update the fed status of the dogs, changing ‘fed’ value will update the fed count display. Displays ‘view dogs’ table to see dogs and their fed status.</li>
+<li>User gets yes/no option to update a dogs fed status.</li>
+<li>New page appears confirming change of value.</li>
+</ul>
+</li>
+<li>
+<p><strong>View dogs still to be fed</strong></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/19-dogs-to-be-fed.png" alt="Dogs to be fed"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/20-code-display-fed-w-no.png" alt="Display those not fed"></p>
+<ul>
+<li>Returns the dogs that need to be fed, and gives the user the option to go to the ‘mark dog as fed’ menu option or return to main menu.</li>
+<li>Uses same functionality as view dogs menu option, however filters out to only show dogs with the ‘Fed’ key value of ‘No’.</li>
+</ul>
+</li>
+<li>
+<p><strong>Remove a dog from the shelter</strong></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/21-remove-dog.png" alt="Remove dog"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/22-code-remove-dog.png" alt="Remove dog (code)"></p>
+<ul>
+<li>Gives the user the ability to remove a dog from the database/shelter. User is able to enter in a ‘DoggyID’ of an entry that they wish to remove from the shelter. Doing so will remove the entry from the database in <code>dogsdb.json</code>.</li>
+<li>Uses view dogs from menu option 1 to showcase dogs in shelter.</li>
+<li>User will be given two forms of confirmation, the first being to hit <code>enter</code> if their ‘DoggyID’ choice is correct, and finally to enter a ‘y / n’ response to confirm its permanent deletion. Different forms of confirmation used so that the user has to do something ‘different’ to confirm the deletion of the entry.</li>
+</ul>
+</li>
+<li>
+<p><strong>Exit the application</strong></p>
+</li>
+</ol>
+<pre><code>- Allows the user to exit the terminal after displaying a goodbye message to the user.
+
+
+***Additional notes***
+
+The notion of it being a dog shelter can be interchanged (ie. the application could also work for a dogsitter that looks after a lot of dogs..?) alternatively, a similar model could be used for something like a nursing home medication tracker with some slight change in variables (nursing home residents profile, breakfast, lunch, dinner medication), or kindergarten/boarding school/special needs school meal/feeding schedule.
+
+- *Nice to have additions*:
+    - Different shelter locations, each with a database of their own animals
+    - Search for dog by name, type or dietary requirement/medication
+    - Adding of dog weight and meal size variable
+    - View *which type of dietary requirements* are required as part of the how many meals/&amp; how many have dietary requirements menu option
+    - Change to an ‘animal’ shelter, incorporating different animals (not just dogs) which can be a new variable to sort/view by. Inclusion of ‘animal type’ variable in information database.
+</code></pre>
+<h2 id="testing">Testing</h2>
+<p>Code was tested through usage of manual testing as testing with pytest was causing issues. Pytest testing is to be implemented later to automate the testing of functions and features within the application.</p>
+<p>The first test tests to check if the 'fed dog counter' tally display on the main menu is working as intended, and updates based on various different user actions that are intended to potentially alter the state of the variables used with the 'fed dog counter'. Additionally, the correct execution of the 'reset fed count on new day' functionality was tested in conjunction with the 'fed dog counter' tests.</p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/test-1.png" alt="Fed counter test"></p>
+<p>The second test was to ensure that the most used item in the application, the main menu, operates as expected.</p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/test-2.png" alt="MM test"></p>
+<h2 id="implementation-plan">Implementation plan</h2>
+<p><a href="https://trello.com/b/6i3SETmp/t1a3-dhfs">View the trello board here</a></p>
+<p>In the early stages of this project, I knew that I had a lot of catching up to do before proceeding to start the build process. The first few days of the project began with me brainstorming various ideas. After re-evalutating my first idea (an application which would work with a musical keyboard, suggesting a users next key to play in a scale based on certain variables), the idea of a Dog Shelter Feeding Helper came to mind.</p>
+<p>An application that is pretty flexible in its use (some small changes in the code can make it very clear that its not strictly for dogs, and can be used as a generalised database type of application) and that would be able to store a users input information, and then change it automatically based off of a certain condition (fed count resetting if session is on a new day).</p>
+<p>Because of these features, I knew that I needed to do further research into how a type of database could interact with a python program, and I also had to figure out the challenge of getting the application to check if the program had been used on the same day or a if it was being used on a new, different day.</p>
+<p>During the build process, a flowchart was made to show the logic and operation of the program.</p>
+<p>Click the image to view a slightly bigger version</p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/t1a3_flowchart.png" alt="flowchart"></p>
+<p>As I was learning things that were quite new to me, I found it hard to allocate set amounts of time to certain actions. For the purpose of measurement, I used ‘Easy’, ‘Medium’, ‘Hard’, and ‘Hard to gauge’ indicators on the tasks that I set out to do. If I used more than one of these indicators on a card, it would lie ‘somewhere in between’ the ones used.</p>
+<ul>
+<li>‘Easy’ would mean that I <em>assume</em> that the task should be easy and I could do a few ‘Easy’ tasks within one day.</li>
+<li>‘Medium’ meant that it would likely take around a day to implement.</li>
+<li>‘Hard’ meant several days or more or <em>assume</em> difficult concept to grasp.</li>
+<li>‘Hard to gauge’ meant that I was not sure how long it would take to implement this feature or grasp this concept.</li>
+</ul>
+<p>This measurement method ended up not working out as accurately as I had planned, as some tasks that were marked as medium or hard, such as ‘F. 6 - View dogs not fed’ which was comparatively pretty easy and done fairly quickly, whereas learning about python testing took me several days. This judgement will hopefully improve as I become more experienced as a coder.</p>
+<p>Additional labels for the tasks were also used:</p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/24-tr-labels.png" alt="Trello labels"></p>
+<p>I used a Trello board (seen below) to help visualise how I approached these tasks to create the applications features, and to tick off the tasks once they had been done. The following are the main features’ Trello cards, and their associated checklists.</p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/25-tr-mvpf.png" alt="Trello MVP"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/26-tr-f1.png" alt="Trello F1"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/27-tr-f1-ch.png" alt="Trello F1 checklist"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/28-tr-f2.png" alt="Trello F2"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/29-tr-f2-ch.png" alt="Trello F2 checklist"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/30-tr-f3.png" alt="Trello F3"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/31-tr-f3-ch.png" alt="Trello F3 checklist"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/32-tr-f4.png" alt="Trello F4"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/32-tr-f4.png" alt="Trello F4 checklist"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/34-tr-f5.png" alt="Trello F5"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/35-tr-f5-ch.png" alt="Trello F5 checklist"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/36-tr-f6.png" alt="Trello F6"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/37-tr-f6-ch.png" alt="Trello F6 checklist"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/38-tr-f7.png" alt="Trello F7"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/39-tr-f7-ch.png" alt="Trello F7 checklist"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/40-tr-f8-mm.png" alt="Trello F8"></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/41-tr-f8-mm-st.png" alt="Trello F8 subtasks"></p>
+<h3 id="trello-usage">Trello usage</h3>
+<p><strong>DAY2 Tuesday 6/12</strong></p>
+<ul>
+<li>Most of the time from Monday 5/12 - Thursday 8/12 was spent on catching up on learning more about python, watching old classes, catching up on Ed coursework, and reading documentation and watching youtube tutorials to familiarise myself with how python operates, to a point where I felt comfortable being able to start building the application.</li>
+</ul>
+<p><img src="file:///Users/jamesboland/python_CA/docs/42-tr-usage-1.png" alt="1 trello"></p>
+<p><strong>Day 5 Friday 9/12</strong> <em>- jumped into build</em></p>
+<ul>
+<li>Started the build after being inspired by watching <a href="https://www.youtube.com/watch?v=f3D-w6XMTN8&amp;t=351s&amp;ab_channel=PhilAdams">this very basic video</a> on how to create a menu and allow the user to input a dogs information. No database was implemented yet but I was able to create the main menu, a key feature from which all others would be accessed.</li>
+</ul>
+<p><img src="file:///Users/jamesboland/python_CA/docs/43-tr-usage-2.png" alt="2 trello"></p>
+<ul>
+<li><em>Was away Saturday 10/12 morning until Sunday 11/12 evening and did not work on the project these dates.</em></li>
+</ul>
+<p><strong>Day 7 Sunday 11/12</strong></p>
+<ul>
+<li>Studied modules/packages and imports and started implementing them into the program. Found the <code>tinydb</code> module and started learning about how to use it with a separate file to store data across terminal sessions.</li>
+</ul>
+<p><img src="file:///Users/jamesboland/python_CA/docs/44-tr-usage-3.png" alt="3 trello"></p>
+<p><strong>Day 8 Monday 12/12</strong></p>
+<p><img src="file:///Users/jamesboland/python_CA/docs/45-tr-usage-4.png" alt="4 trello"></p>
+<p><strong>Day 9 Tuesday 13/12</strong></p>
+<ul>
+<li>Had most of the application done by this point.</li>
+</ul>
+<p><img src="file:///Users/jamesboland/python_CA/docs/46-tr-usage-5.png" alt="5 trello"></p>
+<p><strong>Day 10 Wednesday 14/12</strong></p>
+<ul>
+<li>Application was pretty much done by this stage as it was functional and most errors appeared to be accounted for.</li>
+</ul>
+<p><img src="file:///Users/jamesboland/python_CA/docs/47-tr-usage-6.png" alt="6 trello"></p>
+<p><strong>Day 11 Thursday 15/12 onwards</strong></p>
+<ul>
+<li>Application was at a working and functional level. From this point onwards I made some minor changes to the code to fix some wording and display issues whilst also considering documentation for the project. Code was styled to PEP8 standards. A lot of time has been spent on trying to figure out testing with <code>pytest</code>.</li>
+</ul>
+<p><img src="file:///Users/jamesboland/python_CA/docs/48-tr-usage-7.png" alt="7 trello"></p>
+<h3 id="styling">Styling</h3>
+<p><a href="https://peps.python.org/pep-0008/">PEP8</a></p>
+<ul>
+<li>Code has been styled in accordance with Pep8 styling.</li>
+</ul>
+<h3 id="additional-referenced-sources">Additional referenced sources</h3>
+<ul>
+<li>
+<p>Python datetime (no date) Programiz. Available at: https://www.programiz.com/python-programming/datetime.</p>
+</li>
+<li>
+<p>Real Python (2022) Working with JSON data in python, Real Python. Real Python. Available at: https://realpython.com/python-json/.</p>
+</li>
+<li>
+<p>Reading and writing to text files in Python (2022) GeeksforGeeks. Available at: https://www.geeksforgeeks.org/reading-writing-text-files-python/.</p>
+</li>
+<li>
+<p><em>Documentation</em></p>
+<ul>
+<li>Python 3.11.1 documentation (no date) 3.11.1 Documentation. Available at: https://docs.python.org/3/.</li>
+<li>Tabulate (no date) PyPI. Available at: https://pypi.org/project/tabulate/.</li>
+<li>Welcome to tinydb! (no date) Welcome to TinyDB! - TinyDB 4.7.0 documentation. Available at: https://tinydb.readthedocs.io/en/latest/.</li>
+<li>Pyfiglet (no date) PyPI. Available at: https://pypi.org/project/pyfiglet/0.7/.</li>
+<li>Datetime - basic date and time types (no date) Python documentation. Available at: https://docs.python.org/3/library/datetime.html.</li>
+</ul>
+</li>
+<li>
+<p><em>Youtube</em></p>
+<ul>
+<li>Adams, P. (2015) 20. Creating a menu-based program using functions in Python, YouTube. YouTube. Available at: https://www.youtube.com/?v=ttps9u9kepo.</li>
+<li>Learn Python - Full Course for Beginners tutorial (2018) YouTube. Available at: https://youtu.be/rfscVS0vtbw).</li>
+<li>TinyDB in python - simple database for personal projects (2020) YouTube. YouTube. Available at: https://youtu.be/aP2KJoTITO0.</li>
+</ul>
+</li>
+</ul>
+
+</body>
+</html>

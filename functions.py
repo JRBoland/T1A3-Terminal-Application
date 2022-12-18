@@ -180,8 +180,8 @@ def main_menu():
                 exit()
             else:
                 invalid_input_rtm = input(
-                    "Invalid input. Please answer with 1-7." 
-                    "\nHit 'enter' to return to main menu.")
+                    "Invalid input. Please answer with 1 - 7." 
+                    "\nHit 'enter' to return to main menu. ")
                 main_menu()
 
         except (ValueError, IndexError) as the_error:
@@ -345,7 +345,7 @@ def edit_dog_info():
         print("\n[0] Return to main menu")
 
         selection = input(
-            "\nPlease choose from above what you would like to edit: \n")
+            "\nPlease choose from above (1 - 5) what you would like to edit: \n")
 
         if selection == "1":
             linebreak()

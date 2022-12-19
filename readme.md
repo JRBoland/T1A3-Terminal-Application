@@ -19,7 +19,7 @@ If you do not have Python installed, you can install it **[here](https://www.pyt
 3. In your terminal, navigate to the folder using the 'cd' command. If the folder is on your desktop, this may look like 
 ```cd desktop/t1a3-terminal-application-main```
 
-4. Once you have navigated to the folder of the application, simply type `bash src/setup_app.sh` and the program should install the necessary package requirements 
+4. Once you have navigated to the folder of the application, simply type `bash src/run_setup.sh` and the program should install the necessary package requirements 
 
 5. After this, type `bash src/run_app.sh` to begin the app.
 
@@ -37,7 +37,7 @@ If you do not have Python installed, you can install it **[here](https://www.pyt
 
 ```cd t1a3-terminal-application```
 
-4. Type `bash src/setup_app.sh` and the program should have installed the necessary requirements and `bash src/run_app.sh` to run the app. 
+4. Type `bash src/run_setup.sh` and the program should have installed the necessary requirements and `bash src/run_app.sh` to run the app. 
 
 # Dog Shelter Feeding Helper
 

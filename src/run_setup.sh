@@ -17,8 +17,9 @@ else
 fi
 echo "Installing requirements..."
 #creating the virtual environment
-python3 -m venv .venv
-source .venv/bin/activate
+python3 -m venv venv
+source venv/bin/activate
 #installing the required packages
 pip install -r requirements.txt
-echo "Installed correctly. Please run run_app.sh. A way to do this is by typing bash src/run_app.sh"
+
+echo "Please run run_app.sh. A way to do this is by typing bash src/run_app.sh"

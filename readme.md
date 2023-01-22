@@ -8,6 +8,24 @@ This Python program uses Python 3. You can check if you have python installed by
 
 If you do not have Python installed, you can install it **[here](https://www.python.org/downloads/)**
 
+### Starting the program
+
+*Current startup instructions seem to have issues on some machines. If the instructions below do not work, please use the **GitHub codespaces** method below as a way of accessing and trying the program.*
+
+![GitHub Codespaces](./docs/codespaces-ss.png)
+
+1. Visit the **[projects GitHub repository](https://github.com/JRBoland/T1A3-Terminal-Application)** and click the green `< > Code` button, and click the green 'Create codespace on main' button.
+
+2. In the Codespace, using the built-in terminal, type `bash src/run_app.sh`
+
+![GitHub Codespaces terminal](./docs/codespaces-ss-1.png)
+
+![GitHub Codespaces bash script](./docs/codespaces-ss-2.png)
+
+3. The application should start. If you are met with an error, try typing `bash src/run_setup.sh` in the terminal prior to running `bash src/run_app.sh`
+
+*If this method does not work, and the other methods listed do not work, please contact me*
+
 ### General startup
 
 1. Visit the **[projects GitHub repository](https://github.com/JRBoland/T1A3-Terminal-Application)** and click the green `< > Code` button, and download as a ZIP file. 
@@ -23,7 +41,7 @@ If you do not have Python installed, you can install it **[here](https://www.pyt
 
 5. After this, type `bash src/run_app.sh` to begin the app.
 
-### The Github way
+### The GitHub way
 
 1. Visit the **[projects GitHub repository](https://github.com/JRBoland/T1A3-Terminal-Application)** and click the green `< > Code` button and copy the text provided when HTTP is selected.
 
